@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
-
+from ProjectDefence.errors_handlers import error_handlers
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ProjectDefence.errors_handlers.error_handlers'
 ]
 
 ROOT_URLCONF = 'ProjectDefence.urls'

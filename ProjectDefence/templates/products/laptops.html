@@ -34,10 +34,13 @@
                             href="{% url 'details-product' pk=laptop.pk %}">{{ laptop.name }} </a></h3>
                     <div class="product-price" style="display: inline-block">
                                 <span>£{{ laptop.price }} <span class="product-action add-btn update-cart"
-                                                               data-product="{{ laptop.id }}"
-                                                               data-action="add">
-                        <a href="#!">Add to cart</a>
-                      </span></span>
+                                                                data-product="{{ laptop.id }}"
+                                                                data-action="add">
+                        {% if user.is_authenticated %}
+                            <a href="#">Add to cart</a>
+                            </span>
+                        {% endif %}
+                      </span>
 
                     </div>
                 </div>

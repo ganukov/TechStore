@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <head>
+        <title>404</title>
+    </head>
+    <body>
+
+
+    <!-- 404 -->
+    <section class="py-0 text-white">
+        <div class="image image-overlay" style="background-image:url({% static "images/background.jpg" %})"></div>
+        <div class="container">
+            <div class="row align-items-center justify-content-center vh-100">
+                <div class="col-10 col-md-8 col-lg-4 text-center">
+                    <h1 class="display-1 font-weight-bold"><strong>404</strong></h1>
+                    <p class="lead" ><strong>The page you were looking for wasn't found, if you think this might be a
+                        mistake</strong> <a
+                            href="{% url 'contact-us' %}" class="d-inline-block underline">drop us a line</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

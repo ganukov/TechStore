@@ -34,10 +34,13 @@
                             href="{% url 'details-product' pk=console.pk %}">{{ console.name }} </a></h3>
                     <div class="product-price" style="display: inline-block">
                                 <span>£{{ console.price }} <span class="product-action add-btn update-cart"
-                                                               data-product="{{ console.id }}"
-                                                               data-action="add">
-                        <a href="#">Add to cart</a>
-                      </span></span>
+                                                                 data-product="{{ console.id }}"
+                                                                 data-action="add">
+                        {% if user.is_authenticated %}
+                            <a href="#">Add to cart</a>
+                            </span>
+                        {% endif %}
+                      </span>
                     </div>
                 </div>
             </div>

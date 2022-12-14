@@ -23,25 +23,29 @@
 
     {% for phone in phones %}
         <div class="col-6 col-lg-3" style="display: inline-block">
-                    <div class="product">
-                        <figure class="product-image">
-                            <a href="{% url 'details-product' pk=phone.pk %}">
-                                <img src="{{ phone.image }}" alt="Image" height="200px">
-                            </a>
-                        </figure>
-                        <div class="product">
-                            <h3 class="product-title"><a
-                                    href="{% url 'details-product' pk=phone.pk %}">{{ phone.name }} </a></h3>
-                            <div class="product-price" style="display: inline-block">
-                                <span>£{{ phone.price }} <span class="product-action add-btn update-cart" data-product="{{ phone.id }}"
-                                      data-action="add">
-                        <a href="#">Add to cart</a>
+            <div class="product">
+                <figure class="product-image">
+                    <a href="{% url 'details-product' pk=phone.pk %}">
+                        <img src="{{ phone.image }}" alt="Image" height="200px">
+                    </a>
+                </figure>
+                <div class="product">
+                    <h3 class="product-title"><a
+                            href="{% url 'details-product' pk=phone.pk %}">{{ phone.name }} </a></h3>
+                    <div class="product-price" style="display: inline-block">
+                                <span>£{{ phone.price }} <span class="product-action add-btn update-cart"
+                                                               data-product="{{ phone.id }}"
+                                                               data-action="add">
+                        {% if user.is_authenticated %}
+                            <a href="#">Add to cart</a>
+
+                        {% endif %}
                       </span></span>
 
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
     {% endfor %}
 {% endblock %}

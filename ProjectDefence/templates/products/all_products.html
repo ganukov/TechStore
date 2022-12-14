@@ -11,21 +11,25 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Laptops</li>
+                            <li class="breadcrumb-item active" aria-current="page">All Products</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-     <div class="page-item">
-        {% if page_obj.has_previous %}
-            <a style="justify-content: space-evenly" href="{% url 'latest products' %}?page={{ page_obj.previous_page_number }}"><strong>Previous Page</strong></a>
-        {% endif %}
+        <div class="page-item">
+            {% if page_obj.has_previous %}
+                <a style="justify-content: space-evenly"
+                   href="{% url 'latest products' %}?page={{ page_obj.previous_page_number }}"><strong>Previous
+                    Page</strong></a>
+            {% endif %}
 
-        {% if page_obj.has_next %}
-            <a  style="justify-content: space-evenly;float: right" href="{% url 'latest products' %}?page={{ page_obj.next_page_number }}"><strong>Next Page</strong></a>
-        {% endif %}
-    </div>
+            {% if page_obj.has_next %}
+                <a style="justify-content: space-evenly;float: right"
+                   href="{% url 'latest products' %}?page={{ page_obj.next_page_number }}"><strong>Next
+                    Page</strong></a>
+            {% endif %}
+        </div>
     </section>
 
 
@@ -50,8 +54,10 @@
                              style="display: inline-block">{{ product.specifications }}</div>
                         <span class="product-action add-btn update-cart" data-product="{{ product.id }}"
                               data-action="add">
-                                    <a href="#">Add to cart</a>
-                                  </span>
+                            {% if user.is_authenticated %}
+                                <a href="#">Add to cart</a>
+                                </span>
+                            {% endif %}
                     </div>
                 </div>
             </div>
