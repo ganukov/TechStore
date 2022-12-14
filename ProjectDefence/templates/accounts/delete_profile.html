@@ -1,26 +1,45 @@
 {% extends 'common/base.html' %}l>
 {% load static %}
 {% block content %}
+    {% if user.profile %}
+        <div class="swiper-container swiper-container-alt">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="image image-overlay image-zoom"
+                         style="background-image:url({% static "images/background.jpg" %})"></div>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center vh-80">
+                            <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                                <h1 class="display-2 mb-2">Do you want to <b>DELETE</b> your profile?</h1>
+                                <form action="" method="post">
+                                    {{ form }}
+                                    {% csrf_token %}
+                                    <button class="btn btn-white" type="submit">Delete</button>
+                                </form>
 
-    <div class="swiper-container swiper-container-alt">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="image image-overlay image-zoom"
-                     style="background-image:url({% static "images/background.jpg" %})"></div>
-                <div class="container">
-                    <div class="row align-items-center justify-content-center vh-80">
-                        <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 class="display-2 mb-2">Do you want to <b>DELETE</b> your profile?</h1>
-                            <form action="" method="post">
-                                {{ form }}
-                                {% csrf_token %}
-                                <button class="btn btn-white" type="submit">Delete</button>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="swiper-container swiper-container-alt">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="image image-overlay image-zoom"
+                         style="background-image:url({% static "images/background.jpg" %})"></div>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center vh-80">
+                            <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                                <h1 class="display-2 mb-2">It looks like you <b>don't have</b> an account.Would you like
+                                    to create one?</h1>
+                                <a href="{% url 'sign up' %}" class="btn btn-white">Create profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -56,27 +56,29 @@ class ProfileDeleteView(views.DeleteView):
 
 
 def profile_update(request, pk):
-    profile = Profile.objects.get(pk=pk)
-    form = ProfileFullfilForm(initial=profile.__dict__)
-    items_in_cart = sum([item.quantity for item in OrderItem.objects.all()])
-    if request.method == 'POST':
-        form = ProfileFullfilForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile details', pk=pk)
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(pk=pk)
+        form = ProfileFullfilForm(initial=profile.__dict__)
+        items_in_cart = sum([item.quantity for item in OrderItem.objects.all()])
+        if request.method == 'POST':
+            form = ProfileFullfilForm(request.POST, instance=profile)
+            if form.is_valid():
+                form.save()
+                return redirect('profile details', pk=pk)
+            context = {
+                'form': form,
+                'profile': profile,
+                'items_in_cart': items_in_cart,
+            }
+            return render(request, 'common/../../templates/accounts/update_profile.html', context)
         context = {
             'form': form,
             'profile': profile,
             'items_in_cart': items_in_cart,
+
         }
         return render(request, 'common/../../templates/accounts/update_profile.html', context)
-    context = {
-        'form': form,
-        'profile': profile,
-        'items_in_cart': items_in_cart,
-
-    }
-    return render(request, 'common/../../templates/accounts/update_profile.html', context)
+    return redirect('sign up')
 
 
 class AboutPageView(views.TemplateView):
