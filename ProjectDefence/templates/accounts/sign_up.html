@@ -1,0 +1,31 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+
+<section id="register-page" class="content auth">
+    {% block content %}
+        <div class="image image-overlay" style="background-image:url({% static "images/background.jpg" %})"></div>
+        <div class="container">
+
+                <div class="col-md-10 col-lg-5">
+                    <div id="collapseOne" class="form-group" aria-labelledby="headingOne"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <br><br>
+                            <form method="post" action="{% url 'sign up' %}">
+                                {{ form }}
+
+                                <div class="col-12 mt-2">
+                                    <button class="btn btn-block btn-lg btn-primary"> Register</button>
+                                </div>
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    {% endblock %}

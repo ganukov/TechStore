@@ -1,0 +1,130 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Home Delight</title>
+</head>
+<body>
+{% block content %}
+
+    <!-- slider -->
+    <div class="swiper-container swiper-container-alt">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image image-overlay image-zoom"
+                     style="background-image:url({% static "images/background.jpg" %})"></div>
+                <div class="container">
+                    <div class="row align-items-center justify-content-center vh-80">
+                        <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                            <h1 class="display-2 mb-2">Share your <b>technology passion</b> with us.</h1>
+                            <a href="{% url 'latest products' %}" class="btn btn-white">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="image image-overlay image-zoom"
+                     style="background-image:url({% static "images/background-5.jpg" %})"></div>
+                <div class="container">
+                    <div class="row align-items-center justify-content-center vh-80">
+                        <div class="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
+                            <h1 class="display-2 mb-2">Transform your home with us.</h1>
+                            <a href="{% url 'latest products' %}" class="btn btn-outline-white">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+
+    <!-- categories -->
+    <section class="pt-1">
+        <div class="container-full">
+            <div class="row masonry gutter-1">
+                <div class="col-md-4">
+                    <a href="{% url 'laptops' %}" class="card card-equal equal-50 equal-md-100 card-scale">
+                            <span class="image image-overlay"
+                                  style="background-image: url({% static "images/laptops.jpg" %})"></span>
+                        <div class="card-body text-center text-white">
+                            <h3>Laptops</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'phones' %}" class="card card-equal equal-50 equal-md-100 card-scale">
+                        <span class="image image-overlay"
+                              style="background-image: url({% static "images/phones1.png" %})"></span>
+                        <div class="card-body text-center text-white">
+                            <h3>Mobile Phones</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'consoles' %}" class="card card-equal equal-50 equal-md-100 card-scale">
+                        <span class="image image-overlay"
+                              style="background-image: url({% static "images/consoles.jpg" %})"></span>
+                        <div class="card-body text-center text-white">
+                            <h3>Consoles</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- latest products -->
+
+    <section class="pt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h2>Latest Products</h2>
+                </div>
+            </div>
+
+            {% for product in page_obj %}
+
+                <div class="col-6 col-lg-3" style="display: inline-block">
+                    <div class="product">
+                        <figure class="product-image">
+                            <a href="{% url 'details-product' pk=product.pk %}">
+                                <img src="{{ product.image }}" alt="Image" height="200px">
+                            </a>
+                        </figure>
+                        <div class="product">
+                            <h3 class="product-title"><a
+                                    href="{% url 'details-product' pk=product.pk %}">{{ product.name }} </a></h3>
+                            <div class="product-price" style="display: inline-block">
+
+                                    <span>£{{ product.price |floatformat:2 }} {% if request.user.is_authenticated %}
+                                        <span class="product-action add-btn update-cart"
+                                              data-product="{{ product.id }}"
+                                              data-action="add">
+                        <a href="#">Add to cart</a>
+                      </span></span>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <a class="btn btn-group-lg" href="{% url 'latest products' %}">All Products</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    </body>
+{% endblock %}

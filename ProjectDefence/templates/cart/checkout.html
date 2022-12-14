@@ -1,0 +1,188 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <body>
+
+
+    {% if order.cart_total != 0 %}
+        <!-- hero -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>Checkout</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="no-overflow pt-0">
+            <div class="container">
+
+                <div class="row align-items-end mb-2">
+                    <div class="col-lg-8">
+                        <form action="{% url 'checkout' %}" method="post">
+                            <strong> This is your information so far , if you want to change it, please
+                                proceed: </strong>
+                            <br><br>
+                            <strong>Please enter your first name: {{ form.first_name }}
+                                <br>
+                                Please enter your last name:{{ form.last_name }}
+                                <br>
+                                Please enter your city/town:{{ form.city }}
+                                <br>
+                                Please enter your building number:{{ form.number }}
+                                <br>
+                                Please enter your street name and building number:{{ form.street }}</strong>
+                            <br><br><br>
+                            <div class="row">
+                                <br>
+                                <button class="btn btn-primary btn-lg btn-block"> Place Order</button>
+
+                                {% csrf_token %}
+                            </div>
+                        </form>
+                    </div>
+
+                    <aside class="col-lg-4">
+                        <div class="row">
+
+                            <!-- order preview -->
+                            <div class="col-12">
+                                <div class="card card-data bg-light">
+                                    <div class="card-header py-2 px-3">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h3 class="fs-18 mb-0">Your Cart</h3>
+                                            </div>
+                                            <div class="col text-right">
+                                                <a href="{% url 'cart' %}" class="underline eyebrow">Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-line">
+                                            {% for item in items %}
+                                                <li class="list-group-item d-flex justify-content-between text-dark align-items-center">
+                                                    {{ item.product.name }} x{{ item.quantity }}
+                                                    <span>{{ item.product.price }}</span>
+                                                </li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- order summary -->
+                            <div class="col-12 mt-1">
+                                <div class="card card-data bg-light">
+                                    <div class="card-header py-2 px-3">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h3 class="fs-18 mb-0">Order Summary</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-minimal">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Subtotal
+                                                <span>£{{ order.cart_total }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Shipping
+                                                <span>Free</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer py-2">
+                                        <ul class="list-group list-group-minimal">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center text-dark fs-18">
+                                                Total
+                                                <span>£{{ order.cart_total }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- cart -->
+        <div class="modal fade sidebar" id="cart" tabindex="-1" role="dialog" aria-labelledby="cartLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartLabel">Cart</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- addresses -->
+        <div class="modal sidebar fade" id="addresses" tabindex="-1" role="dialog" aria-labelledby="addressesLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addressesLabel">My Addresses</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row gutter-3">
+                            <div class="col-12">
+                                <div class="custom-control custom-choice">
+                                    <input type="radio" name="choiceRadio" class="custom-control-input"
+                                           id="customChoice1">
+                                    <label class="custom-control-label text-dark" for="customChoice1">
+                                        {{ request.user.profile.street }} {{ request.user.profile.city }}
+                                    </label>
+                                    <span class="choice-indicator"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% else %}
+        <div class="swiper-container swiper-container-alt">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="image image-overlay image-zoom"
+                         style="background-image:url({% static "images/background.jpg" %})"></div>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center vh-80">
+                            <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                                <h1 class="display-2 mb-2">Your cart is <b>empty</b>.Would you like to check our store
+                                    out?</h1>
+                                <a href="{% url 'latest products' %}" class="btn btn-white">Shop</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </body>
+{% endblock %}

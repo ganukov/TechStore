@@ -1,0 +1,49 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+    <!-- hero -->
+    <section class="hero hero-small">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="mb-0">Consoles</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Consoles</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    {% for console in consoles %}
+        <div class="col-6 col-lg-3" style="display: inline-block">
+            <div class="product">
+                <figure class="product-image">
+                    <a href="{% url 'details-product' pk=console.pk %}">
+                        <img src="{{ console.image }}" alt="Image" height="200px">
+                    </a>
+                </figure>
+                <div class="product">
+                    <h3 class="product-title"><a
+                            href="{% url 'details-product' pk=console.pk %}">{{ console.name }} </a></h3>
+                    <div class="product-price" style="display: inline-block">
+                                <span>£{{ console.price }} <span class="product-action add-btn update-cart"
+                                                               data-product="{{ console.id }}"
+                                                               data-action="add">
+                        <a href="#">Add to cart</a>
+                      </span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% endfor %}
+{% endblock %}

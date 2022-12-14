@@ -1,0 +1,251 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- lookbook -->
+    <section class="hero bg-purple text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="mb-2">Our Story</h1>
+                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quas omnis iure
+                        perferendis tempore et nulla sed neque eligendi. Nemo temporibus omnis neque consequatur illum
+                        quae et, laudantium minus nam!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cumque consectetur a porro
+                        natus maiores repellendus nostrum voluptates praesentium. Velit enim quibusdam tenetur nisi
+                        eaque veniam debitis, labore modi at!</p>
+                </div>
+            </div>
+            <div class="row gutter-1 masonry gallery collage mb-10">
+                <div class="col-6">
+                    <figure class="equal equal-75">
+                        <a class="image image-scale" href="{% static "images/about-1.jpg" %}"
+                           style="background-image: url({% static "images/about-1.jpg" %});">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-6">
+                    <figure class="equal equal-125">
+                        <a class="image image-scale" href="{% static "images/about-2.jpg" %}"
+                           style="background-image: url({% static "images/about-2.jpg" %});">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-6">
+                    <figure class="equal equal-50">
+                        <a class="image image-scale" href="{% static "images/about-3.jpg" %}"
+                           style="background-image: url({% static "images/about-3.jpg" %});">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="row gutter-4">
+                <div class="col-md-4">
+                    <div class="text-center px-2">
+                        <i class="icon-Money---Alt fs-40 mb-2"></i>
+                        <h4 class="eyebrow d-block text-white">Moneyback Guarantee</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center px-2">
+                        <i class="icon-Airplane fs-40 mb-2"></i>
+                        <h4 class="eyebrow d-block text-white">Free Delivery</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center px-2">
+                        <i class="icon-Guard fs-40 mb-2"></i>
+                        <h4 class="eyebrow d-block text-white">International Warranty</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- text -->
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p class="lead">
+                        Our products are inspired by the people and world around us. Beautiful, high quality goods that
+                        are designed especially for you. Discover our story and meet the people that make our brand what
+                        it is.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- cta -->
+    <section class="pt-0">
+        <div class="container">
+            <div class="cta bg-primary">
+                <div class="row align-items-center gutter-0">
+                    <div class="col-md-6 cta-image">
+                        <div class="image image-overlay image-scroll"
+                             style="background-image:url({% static "images/card-2.jpg" %})"
+                             data--100-bottom-top="transform: translateY(0%);"
+                             data-top-bottom="transform: translateY(25%);"></div>
+                    </div>
+                    <div class="col-md-6 py-5 py-md-0 text-white text-center">
+                        <h2 class="mb-2"><b class="d-block font-weight-bold">Have a project ?</b> Let's talk.</h2>
+                        <a href="#!" class="underline action">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- numbers -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 class="section-title">
+                        Numbers
+                    </h2>
+                </div>
+            </div>
+            <div class="row gutter-2 gutter-md-4">
+                <div class="col-md-6 col-lg-3">
+                    <span class="h1 font-weight-bold">50</span>
+                    <p>Collective years experience — Working with clients like Google and Amazon.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <span class="h1 font-weight-bold">120</span>
+                    <p>Collective years experience — Working with clients like Google and Amazon.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <span class="h1 font-weight-bold">20</span>
+                    <p>Collective years experience — Working with clients like Google and Amazon.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <span class="h1 font-weight-bold">15</span>
+                    <p>Collective years experience — Working with clients like Google and Amazon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <!-- cart -->
+    <div class="modal fade sidebar" id="cart" tabindex="-1" role="dialog" aria-labelledby="cartLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartLabel">Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row gutter-3">
+                        <div class="col-12">
+                            <div class="cart-item cart-item-sm">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-9">
+                                        <div class="media media-product">
+                                            <a href="#!"><img src="assets/images/demo/product-3.jpg" alt="Image"></a>
+                                            <div class="media-body">
+                                                <h5 class="media-title">Black IC Pendant Light</h5>
+                                                <span class="media-subtitle">Black, Steel</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 text-center text-lg-right">
+                                        <span class="cart-item-price">$90</span>
+                                    </div>
+                                    <a href="#!" class="cart-item-close"><i class="icon-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="cart-item cart-item-sm">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-9">
+                                        <div class="media media-product">
+                                            <a href="#!"><img src="assets/images/demo/product-4.jpg" alt="Image"></a>
+                                            <div class="media-body">
+                                                <h5 class="media-title">Red Analog Magazine Rack</h5>
+                                                <span class="media-subtitle">Red</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 text-center text-lg-right">
+                                        <span class="cart-item-price">$120</span>
+                                    </div>
+                                    <a href="#!" class="cart-item-close"><i class="icon-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="cart-item cart-item-sm">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-9">
+                                        <div class="media media-product">
+                                            <a href="#!"><img src="assets/images/demo/product-24.jpg" alt="Image"></a>
+                                            <div class="media-body">
+                                                <h5 class="media-title">Closca Helmet</h5>
+                                                <span class="media-subtitle">Black</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 text-center text-lg-right">
+                                        <span class="cart-item-price">$132</span>
+                                    </div>
+                                    <a href="#!" class="cart-item-close"><i class="icon-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="row gutter-0">
+                            <div class="col d-none d-md-block">
+                                <a href="../cart/cart.html" class="btn btn-lg btn-block btn-secondary">View Cart</a>
+                            </div>
+                            <div class="col">
+                                <a href="../cart/checkout.html" class="btn btn-lg btn-block btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- search -->
+    <div class="modal fade search" id="search" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="text" class="form-control" placeholder="Type your search here"
+                           aria-label="Type your search here" aria-describedby="button-addon2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

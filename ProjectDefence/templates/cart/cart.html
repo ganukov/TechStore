@@ -1,0 +1,108 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    {% if order.cart_total != 0 %}
+        <!-- hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>Your Cart</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="pt-0">
+            <div class="container">
+                <div class="row mb-0 d-none d-lg-flex">
+                    <div class="col">
+                        <div class="row pr-6">
+                            <div class="col-lg-6"><span class="eyebrow">Product</span></div>
+                            <div class="col-lg-2 text-center"><span class="eyebrow">Price</span></div>
+                            <div class="col-lg-2 text-center"><span class="eyebrow">Quantity</span></div>
+                            <div class="col-lg-2 text-center"><span class="eyebrow">Total</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col cart-item-list cart-item-list-minimal">
+                        {% for item in items %}
+
+                            <!-- cart item -->
+                            <div class="cart-item">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-lg-6">
+                                        <div class="media media-product">
+                                            <a href="#!"><img src="{{ item.product.image }}" alt="Image"></a>
+                                            <div class="media-body">
+                                                <h5 class="media-title">{{ item.product.name }}</h5>
+                                                <span class="small">{{ item.product.make }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-2 text-center">
+                                        <span class="cart-item-price">£{{ item.product.price |floatformat:2 }}</span>
+                                    </div>
+                                    <div class="col-4 col-lg-2 text-center">
+                                        <div class="counter">
+                                            <span data-product="{{ item.product.id }}" data-action='remove'
+                                                  class="counter-minus icon-minus update-cart"></span>
+                                            {{ item.quantity }}
+                                            <span data-product="{{ item.product.id }}" data-action='add'
+                                                  class="counter-plus icon-plus update-cart"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-2 text-center">
+                                        <span class="cart-item-price">£{{ item.total }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="inline-block">
+                            <span class="eyebrow">Total</span>
+                            <h4 class="h2">{{ order.cart_total|floatformat:2 }}</h4>
+                            <span class="eyebrow">Items</span>
+                            <h1 class="h1"> {{ order.cart_items }}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="input-group">
+
+
+                        </div>
+                        <a href="{% url 'checkout' %}" class="btn btn-lg btn-primary btn-block mt-1">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <div class="swiper-container swiper-container-alt">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="image image-overlay image-zoom"
+                         style="background-image:url({% static "images/background.jpg" %})"></div>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center vh-80">
+                            <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                                <h1 class="display-2 mb-2">Your cart is <b>empty</b>.Would you like to check our store
+                                    out?</h1>
+                                <a href="{% url 'latest products' %}" class="btn btn-white">Shop</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

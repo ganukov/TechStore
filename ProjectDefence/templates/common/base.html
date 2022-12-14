@@ -1,0 +1,197 @@
+{% load static %}
+<!-- header -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <link rel="stylesheet" href="{% static "css/vendor.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet"
+          href="{% static "css/../../ProjectDefence/products/../../static/css/../../ProjectDefence/products/../../static/css/../../ProjectDefence/products/../../static/css/forms.css" %}">
+    {#    <!-- CSS only -->#}
+    {#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"#}
+    {#          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">#}
+
+    <title>Tech Delight</title>
+    <link rel="icon" href="{% static "images/25694.png" %}">
+    <script type="text/javascript">
+        var user = '{{ request.user }}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getToken('csrftoken');
+    </script>
+</head>
+</html>
+
+
+<header class="header header-dark bg-dark header-sticky">
+    <div class="container">
+        <div class="row"></div>
+
+
+        <header class="header header-dark header-sticky">
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-dark">
+                        <button class="navbar-toggler order-2" type="button" data-toggle="collapse"
+                                data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                                <li class="nav-item dropdown megamenu">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-4" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menu
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
+                                        <div class="row">
+                                            <ul class="col-6 col-md-3 col-lg-2">
+
+                                                <li><span class="megamenu-title">Shop</span></li>
+                                                <li><a class="dropdown-item" href="{% url 'laptops' %}">Laptops</a>
+                                                <li><a class="dropdown-item" href="{% url 'phones' %}">Mobile
+                                                    Phones</a>
+                                                <li><a class="dropdown-item" href="{% url 'consoles' %}">Consoles</a>
+                                                </li>
+
+                                            </ul>
+                                            <ul class="col-6 col-md-3 col-lg-2">
+                                                {% if request.user.is_authenticated %}
+
+                                                    <li><span class="megamenu-title">Order</span></li>
+                                                    <li><a class="dropdown-item" href="{% url 'cart' %}">Cart</a></li>
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'checkout' %}">Checkout</a></li>
+                                                    </ul>
+                                                    <ul class="col-6 col-md-3 col-lg-2">
+                                                        <li><span class="megamenu-title">Account</span></li>
+                                                        <li><a class="dropdown-item" href="{% url 'sign out' %}">Log
+                                                            out</a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="{% url 'profile details' pk=request.user.pk %}">Profile</a>
+                                                        </li>
+                                                    </ul>
+
+                                                {% endif %}
+
+                                            <ul class="col-6 col-md-3 col-lg-2">
+                                                <li><span class="megamenu-title">Info</span></li>
+                                                <li><a class="dropdown-item" href="{% url 'about-us' %}">About us</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="{% url 'contact-us' %}">Contact
+                                                    us</a></li>
+                                            </ul>
+
+                                            {% if request.user.is_staff %}
+                                                <div class="col-lg-4">
+                                                    <div class="promo">
+                                                        <span class="image image-overlay"
+                                                              style="background-image: url({% static "images/phones.jpg" %})"></span>
+                                                        <div class="promo-footer p-4 text-white">
+                                                            <h3 class="mb-0">Add the new stock!</h3>
+                                                            <a href="{% url 'add-product' %}"
+                                                               class="eyebrow underline text-white">Add Product</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
+                            <ul class="navbar-nav ml-auto">
+                                {% if not request.user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'sign up' %}">Register</a></li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'sign in' %}">Log In</a></li>
+
+                                {% else %}
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'sign out' %}">Log Out</a>
+                                    </li>
+                                    <li class="nav-item cart">
+                                        <a  href="{% url 'cart' %}" class="nav-link"><span>Cart</span><span>{{ items_in_cart }}</span></a>
+                                    </li>
+                                {% endif %}
+
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<!-- footer -->
+<footer class="bg-dark text-white py-0">
+    <div class="container">
+        <div class="row separated">
+            <div class="col-lg-6 py-10">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="eyebrow mb-0">Quick Links</h4>
+                        <ul class="list-group list-group-columns">
+                            <li class="list-group-item"><a href="{% url 'about-us' %}">About</a></li>
+                            <li class="list-group-item"><a href="{% url 'contact-us' %}">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 py-10">
+                <div class="row justify-content-end">
+                    <div class="col-lg-10">
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-lg-10">
+                        <h4 class="eyebrow mb-2">Follow us</h4>
+                        <nav class="nav nav-icons">
+                            <a class="nav-link" href="https://facebook.com#"><i class="icon-facebook-o"></i></a>
+                            <a class="nav-link" href="https://twitter.com/"><i class="icon-twitter-o"></i></a>
+                            <a class="nav-link" href="https://youtube.com"><i class="icon-youtube-o"></i></a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static "js/vendor.min.js" %}"></script>
+<script src="{% static "js/app.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>

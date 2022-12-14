@@ -1,0 +1,65 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+    <!-- hero -->
+    <section class="hero hero-small">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="mb-0">All Products</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Laptops</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+     <div class="page-item">
+        {% if page_obj.has_previous %}
+            <a style="justify-content: space-evenly" href="{% url 'latest products' %}?page={{ page_obj.previous_page_number }}"><strong>Previous Page</strong></a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a  style="justify-content: space-evenly;float: right" href="{% url 'latest products' %}?page={{ page_obj.next_page_number }}"><strong>Next Page</strong></a>
+        {% endif %}
+    </div>
+    </section>
+
+
+
+    {% for product in page_obj %}
+        <div class="col-lg-3" style="display: inline-block">
+            <div class="product" style="display: inline-block">
+                <figure class="product-image" style="display: inline-block">
+                    <a href="{% url 'details-product' pk=product.pk %}">
+                        <img src="{{ product.image }}" alt="Image" height="200px">
+
+                    </a>
+
+                </figure>
+                <div class="description" style="display: inline-block">
+                    <h3 class="product-title"><a
+                            href="{% url 'details-product' pk=product.pk %}">{{ product.name }} {{ product.make }} </a>
+                    </h3>
+                    <div class="product-price" style="display: inline-block">
+                        <span>£{{ product.price }}</span>
+                        <div class="carousel-item-right"
+                             style="display: inline-block">{{ product.specifications }}</div>
+                        <span class="product-action add-btn update-cart" data-product="{{ product.id }}"
+                              data-action="add">
+                                    <a href="#">Add to cart</a>
+                                  </span>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+
+
+
+    {% endfor %}
+
+{% endblock %}

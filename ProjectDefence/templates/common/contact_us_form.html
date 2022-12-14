@@ -1,0 +1,31 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <section>>
+        <div class="image image-overlay" style="background-image:url({% static "images/background.jpg" %})"></div>
+        <div class="container">
+            <div class="row justify-content-center align-items-center vh-md-100">
+                <div class="col-md-10 col-lg-5">
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+
+                            <form method="post" action="{% url 'contact-us' %}">
+                                {{ form }}
+                                <label for="contactText"></label><textarea id="contactText" class="text" cols="86"
+                                                                           rows="3" style="height: 192px;"
+                                                                           name="confirmationText"
+                                                                           form="confirmationForm"></textarea>
+                                <div class="col-12 mt-2">
+                                    <button class="btn btn-primary"> Send</button>
+                                </div>
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

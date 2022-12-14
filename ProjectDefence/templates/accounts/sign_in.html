@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <section id="login-page" class="content auth">>
+        <div class="image image-overlay" style="background-image:url({% static "images/background.jpg" %})"></div>
+        <div class="container">
+            <div class="row justify-content-center align-items-center vh-md-100">
+                <div class="col-md-10 col-lg-5">
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                <form method="post" action="{% url 'sign in' %}">
+                                    <strong style="color: #abdde5">{{ form }}</strong>
+                                    <div class="col-12 mt-2">
+                                        <button class="btn btn-block btn-lg btn-primary"> Log In</button>
+                                        <input name="next" type="hidden" value="{{ next }}">
+                                    </div>
+                                    {% csrf_token %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+{% endblock %}

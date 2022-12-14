@@ -1,0 +1,36 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- contact form -->
+
+    <section class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-6">
+                    <h1 class="font-weight-bold"><b class="d-block">Get in touch!</b> It's free.</h1>
+                </div>
+            </div>
+            <div class="row gutter-4">
+                <div class="col-md-5 col-lg-4">
+                    <span class="eyebrow">Find us</span>
+                    <p class="lead my-1 text-dark">123 6th St. <br>Melbourne, FL 32904 <br>+01 123 456 7890</p>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <span class="eyebrow">Contact Us</span>
+                    <p class="lead my-1 text-dark">
+                        Phone: +1 234 567 89 <br>
+                        Fax: +1 234 567 89
+                    </p>
+                    <a href="{% url 'enquiry' %}" class="eyebrow underline action">TechDelight@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+{% endblock %}

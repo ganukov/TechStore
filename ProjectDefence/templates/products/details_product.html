@@ -1,0 +1,122 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-- product -->
+    <section class="py-0 bg-light no-overflow">
+        <div class="container">
+            <div class="row vh-lg-100 justify-content-between align-items-end">
+                <div class="col-lg-7">
+                    <div class="owl- visible gallery" data-margin="400" data-nav="true" data-loop="true"
+                         data-slidespeed="2000">
+                        <figure class="equal equal-70">
+                            <a class="image" href="{{ product.image }}"
+                               style="background-image: url({{ product.image }});">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-5 pb-10 foreground">
+                    <div class="bg-white p-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="item-brand">{{ product.make }}</span>
+                                <h1 class="item-title">{{ product.name }}</h1>
+                                <span class="item-price">£{{ product.price|floatformat:2 }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {% if request.user.is_authenticated %}
+                                    <span class="product-action btn btn-block btn-lg btn-primary add-btn update-cart"
+                                          data-product="{{ product.id }}"
+                                          data-action="add"
+                                    >Add to Cart</span>
+                                {% else %}
+                                    <a href="{% url "sign up" %}"
+                                       class="product-action btn btn-block btn-lg btn-primary">Register</a>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 mt-1">
+                                <ul class="nav nav-actions">
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href=""
+                                           role="button" aria-haspopup="true" aria-expanded="false">Share this
+                                            product</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="https://www.facebook.com/">Facebook</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="https://twitter.com/">Twitter</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- info -->
+    {% if product.choice == 'Laptop' or product.choice == 'Console' %}
+        <section>
+            <div class="container">
+                <div class="row gutter-2 gutter-lg-4">
+
+                    <div class="col-md-8 col-lg-6">
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <ul class="list-group list-group-line">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                CPU
+                                <span>{{ product.cpu }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                GPU
+                                <span>{{ product.gpu }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Weight
+                                <span>{{ product.weight }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <section>
+            <div class="container">
+                <div class="row gutter-2 gutter-lg-4">
+
+                    <div class="col-md-8 col-lg-6">
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <ul class="list-group list-group-line">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                OS
+                                <span>{{ product.os }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Weight
+                                <span>{{ product.weight }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+
+{% endblock %}

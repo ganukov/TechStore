@@ -1,0 +1,125 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if user.profile %}
+    <!-- hero -->
+    <section class="hero hero-small bg-purple text-white">
+        <div class="container">
+            <div class="row gutter-2 gutter-md-4 align-items-end">
+                <div class="col-md-6 text-center text-md-left">
+                    <div class="row"></div>
+                    <div class="row"></div>
+                    {% if user.profile.first_name and user.profile.last_name %}
+                        <h1 class="mb-0">{{ user.profile.first_name }} {{ user.profile.last_name }}</h1>
+                        <span class="text-muted">{{ user.profile.number }} {{ user.profile.street }}, {{ user.profile.city }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- listing -->
+        <section class="pt-5">
+            <div class="container">
+                <div class="row gutter-4 justify-content-between">
+                    <div class="col-6">
+                        <figure class="equal equal-100">
+                            <a class="image image-scale" href="{{ user.profile.image }}"
+                               style="background-image: url({{ user.profile.image }});">
+                            </a>
+                        </figure>
+                    </div>
+
+
+                    <!-- content -->
+                    <div class="pt-5">
+                        <div class="row">
+                            <div class="col">
+                                <div class="tab-content" id="myTabContent">
+
+                                    <!-- profile -->
+                                    <div class="tab-pane fade show active" id="sidebar-1-1" role="tabpanel"
+                                         aria-labelledby="sidebar-1-1">
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <h3>Personal Data</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row gutter-1">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h6>First Name</h6>
+                                                    <strong>{{ user.profile.first_name }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h6>Last Name</h6>
+                                                    <strong>
+                                                        {{ user.profile.last_name }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <br>
+                                                <div class="form-group">
+                                                    <h6>City</h6>
+                                                    <strong>{{ user.profile.city }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h6>Number/Street</h6>
+                                                    <strong>{{ user.profile.number }} {{ user.profile.street }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h6>Email</h6>
+                                                    <strong> {{ user.email }}</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </div>
+                                <div class="row">
+                                    <a href="{% url 'profile update' pk=user.pk %}"
+                                       class="btn btn-lg btn-block btn-primary">Update Profile</a>
+                                </div>
+                                <div class="row">
+                                    <a href="{% url 'profile delete' pk=user.profile.pk %}"
+                                       class="btn btn-lg btn-block btn-primary">Delete Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <div class="swiper-container swiper-container-alt">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="image image-overlay image-zoom"
+                         style="background-image:url({% static "images/background.jpg" %})"></div>
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center vh-80">
+                            <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                                <h1 class="display-2 mb-2">Your profile is <b>not completed</b>.Please enter your
+                                    information in order to continue using our site.</h1>
+                                <a href="{% url 'profile update' pk=user.pk %}" class="btn btn-white">Update profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

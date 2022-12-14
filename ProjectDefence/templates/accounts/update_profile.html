@@ -1,0 +1,61 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-- hero -->
+    <section class="hero hero-small bg-purple text-white">
+        <div class="container">
+            <div class="row gutter-2 gutter-md-4 align-items-end">
+                <div class="col-md-6 text-center text-md-left">
+                    <div class="row"></div>
+                    <div class="row"></div>
+
+                    <h1 class="mb-0">{{ user.profile.first_name }} {{ user.profile.last_name }}</h1>
+                    <span class="text-muted">{{ user.profile.street }}, {{ user.profile.city }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- listing -->
+    <section class="pt-5">
+        <div class="container">
+            <div class="row gutter-4 justify-content-between">
+                <form action="{% url 'profile update' pk=profile.pk %}" method="post">
+                    <strong> This is your information so far , if you want to change it, please proceed: </strong>
+                    <br><br>
+                    <strong>Please enter your first name: {{ form.first_name }}
+                        <br>
+                        Please enter your last name:{{ form.last_name }}
+                        <br>
+                        Please enter your city/town:{{ form.city }}
+                        <br>
+                        Please add a profile picture:{{ form.image }}
+                        <br>
+                        Please enter your building number:{{ form.number }}
+                        <br>
+                        Please enter your street name:{{ form.street }}</strong>
+                    <br><br><br>
+                    <div class="row">
+
+                        <button class="btn btn-lg btn-block btn-primary"> Update Profile</button>
+
+                        {% csrf_token %}
+                    </div>
+                </form>
+                {% if profile.image %}
+                    <div class="col-6">
+                        <figure class="equal equal-md-120">
+                            <a class="image image-scale" href="{{ profile.image }}"
+                               style="background-image: url({{ profile.image }});">
+                            </a>
+                        </figure>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
