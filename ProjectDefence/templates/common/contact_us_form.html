@@ -11,12 +11,8 @@
                          data-parent="#accordionExample">
                         <div class="card-body">
 
-                            <form method="post" action="{% url 'contact-us' %}">
+                            <form method="post" action="{% url 'enquiry' %}">
                                 {{ form }}
-                                <label for="contactText"></label><textarea id="contactText" class="text" cols="86"
-                                                                           rows="3" style="height: 192px;"
-                                                                           name="confirmationText"
-                                                                           form="confirmationForm"></textarea>
                                 <div class="col-12 mt-2">
                                     <button class="btn btn-primary"> Send</button>
                                 </div>

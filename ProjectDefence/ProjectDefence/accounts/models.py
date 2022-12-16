@@ -24,7 +24,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         unique=True,
         null=False,
         blank=False,
-        )
+    )
     USERNAME_FIELD = 'email'
     is_staff = models.BooleanField(
         default=False,
@@ -32,6 +32,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         blank=False,
     )
     objects = AppUserManager()
+
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=MAX_LENGTH_FIRST_NAME, validators=[

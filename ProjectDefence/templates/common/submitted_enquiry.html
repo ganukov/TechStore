@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="swiper-container swiper-container-alt">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image image-overlay image-zoom"
+                     style="background-image:url({% static "images/background.jpg" %})"></div>
+                <div class="container">
+                    <div class="row align-items-center justify-content-center vh-80">
+                        <div class="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
+                            <h1 class="display-2 mb-2">Your enquiry has been <b>submitted</b>. You will be contacted by
+                                a member of our staff as soon as possible.</h1>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'latest products' %}" class="btn btn-white">Shop Now</a>
+                            {% else %}
+                                <a href="{% url 'sign up' %}" class="btn btn-white">Register</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="image image-overlay image-zoom"
+                     style="background-image:url({% static "images/background-5.jpg" %})"></div>
+                <div class="container">
+                    <div class="row align-items-center justify-content-center vh-80">
+                        <div class="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
+                            {% if user.is_authenticated %}
+                            <h1 class="display-2 mb-2">Logg Out</h1>
+                            <a href="{% url 'sign out' %}" class="btn btn-outline-white">Sign Out</a>
+                            {% else %}
+                            <h1 class="display-2 mb-2">Our records indicate that you <b>haven't registered</b> with us. Press the button below for registration</h1>
+                            <a href="{% url 'sign up' %}" class="btn btn-outline-white">Register</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+{% endblock %}

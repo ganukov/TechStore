@@ -14,6 +14,7 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 from ProjectDefence.errors_handlers import error_handlers
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,10 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Application apps
     'ProjectDefence.accounts',
     'ProjectDefence.common',
     'ProjectDefence.products',
     'ProjectDefence.cart',
+    # Third party apps
+    'rest_framework',
 
 ]
 

@@ -21,6 +21,9 @@ urlpatterns = [
     path('accounts/', include('ProjectDefence.accounts.urls')),
     path('', include('ProjectDefence.common.urls')),
     path('products/', include('ProjectDefence.products.urls')),
-    path('cart/',include('ProjectDefence.cart.urls')),
+    path('cart/', include('ProjectDefence.cart.urls')),
+
+    # API
+    path('api-auth/', include('rest_framework.urls')),
 
 ]

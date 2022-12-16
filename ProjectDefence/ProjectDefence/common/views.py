@@ -1,5 +1,7 @@
 from urllib import request
 
+from django.views.generic.edit import ModelFormMixin, ProcessFormView
+
 from ProjectDefence.accounts.forms import ProfileFullfilForm, ProfileCheckForm, ProfileDeleteForm
 from ProjectDefence.accounts.models import Profile, AppUser
 from ProjectDefence.cart.models import Order, OrderItem
@@ -105,14 +107,25 @@ class ContactUsPageView(views.TemplateView):
         return context
 
 
-class ContactUsFormView(views.FormView):
-    template_name = 'common/contact_us_form.html'
-    form_class = ContactForm
+def complaint_form(request):
+    form = ContactForm
+    user = request.user
+    items_in_cart = sum([item.quantity for item in OrderItem.objects.all()])
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            items_in_cart = sum([item.quantity for item in OrderItem.objects.all()])
+            return render(request, 'common/submitted_enquiry.html', context={'items_in_cart': items_in_cart})
+        context = {'form': form, 'user': user, 'items_in_cart': items_in_cart}
+        return render(request, 'common/contact_us_form.html', context)
+    context = {'form': form, 'user': user, 'items_in_cart': items_in_cart}
+    return render(request, 'common/contact_us_form.html', context)
 
-    def get_context_data(self, **kwargs):
-        context = super(ContactUsFormView, self).get_context_data(**kwargs)
-        if Order.objects.all() != 0:
-            context['items_in_cart'] = sum([item.quantity for item in OrderItem.objects.all()])
-        else:
-            context['items_in_cart'] = 0
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ContactUsFormView, self).get_context_data(**kwargs)
+    #     if Order.objects.all() != 0:
+    #         context['items_in_cart'] = sum([item.quantity for item in OrderItem.objects.all()])
+    #     else:
+    #         context['items_in_cart'] = 0
+    #     return context
