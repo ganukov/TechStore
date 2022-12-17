@@ -15,16 +15,22 @@ class Product(models.Model):
     )
     name = models.CharField(
         max_length=50,
-        null=True,
+        null=False,
+        blank=False,
     )
     make = models.CharField(
         max_length=50,
+        null=False,
+        blank=False,
     )
     price = models.FloatField(
         max_length=25,
+        default=0,
         validators=[MinValueValidator(0), ],
     )
     image = models.URLField(
+        null=False,
+        blank=False,
 
     )
     cpu = models.CharField(
@@ -38,6 +44,7 @@ class Product(models.Model):
         blank=True,
     )
     weight = models.FloatField(
+        default=0,
         null=False,
         blank=False,
     )

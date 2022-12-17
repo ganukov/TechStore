@@ -21,4 +21,9 @@ UserModel = get_user_model()
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Complaint
-        fields = ('first_name', 'email', 'subject', 'message')
+        fields = (
+            'first_name',
+            'email',
+            'subject',
+            'message',
+        )

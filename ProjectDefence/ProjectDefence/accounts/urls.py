@@ -1,5 +1,6 @@
-from ProjectDefence.accounts.views import SignUpView, SignInView, SignOutView
-from ProjectDefence.common.views import ProfileDetailsView, profile_update, ProfileDeleteView
+from ProjectDefence.accounts.views import SignUpView, SignInView, SignOutView, ProfileDetailsView, profile_update, \
+    ProfileDeleteView
+
 from django.urls import path
 
 urlpatterns = (
@@ -8,7 +9,6 @@ urlpatterns = (
     path('logout/', SignOutView.as_view(), name='sign out'),
     path('profile-details/<int:pk>/', ProfileDetailsView.as_view(), name='profile details'),
     path('profile-update/<int:pk>/', profile_update, name='profile update'),
-    path('profile-delete/<int:pk>/',ProfileDeleteView.as_view(),name='profile delete'),
-
+    path('profile-delete/<int:pk>/', ProfileDeleteView.as_view(), name='profile delete'),
 
 )

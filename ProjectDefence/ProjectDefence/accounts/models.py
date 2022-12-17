@@ -20,7 +20,9 @@ MAX_VALUE_NUMBER = 500
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
-        error_messages={'unique': 'Email has been used from another user ,please enter a different email.'},
+        error_messages={
+            'unique': 'Email has been used from another user ,please enter a different email.',
+        },
         unique=True,
         null=False,
         blank=False,
@@ -35,10 +37,12 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class Profile(models.Model):
-    first_name = models.CharField(max_length=MAX_LENGTH_FIRST_NAME, validators=[
-        check_name_contains_only_letters,
-        MinLengthValidator(MIN_LENGTH_FIRST_NAME),
-    ])
+    first_name = models.CharField(
+        max_length=MAX_LENGTH_FIRST_NAME,
+        validators=[
+            check_name_contains_only_letters,
+            MinLengthValidator(MIN_LENGTH_FIRST_NAME),
+        ])
 
     last_name = models.CharField(
         max_length=MAX_LENGTH_LAST_NAME,
@@ -61,8 +65,15 @@ class Profile(models.Model):
         validators=[
             MinValueValidator(MIN_VALUE_NUMBER),
         ])
-    user = models.OneToOneField(AppUser, primary_key=True, on_delete=models.CASCADE)
-    image = models.URLField(null=True, blank=True, )
+    user = models.OneToOneField(
+        AppUser,
+        primary_key=True,
+        on_delete=models.CASCADE
+    )
+    image = models.URLField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return f"{str(self.pk)}"

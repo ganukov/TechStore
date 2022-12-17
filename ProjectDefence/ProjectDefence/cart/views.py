@@ -18,6 +18,7 @@ from rest_framework import viewsets
 UserModel = get_user_model()
 
 
+# cart/orders/
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -58,6 +59,7 @@ def checkout(request):
         items = order.orderitem_set.all().order_by('pk')
         form = ProfileFullfilForm(initial=customer.__dict__)
         items_in_cart = order.cart_items
+
         if request.method == 'POST':
             form = ProfileFullfilForm(request.POST, instance=customer)
 
@@ -68,11 +70,13 @@ def checkout(request):
                 OrderItem.objects.all().delete()
                 context = {'customer': customer, 'items_in_cart': items_in_cart, }
                 return render(request, 'common/../../templates/cart/placed_order.html', context)
+
             context = {'items': items, 'order': order, 'form': form, 'items_in_cart': items_in_cart, }
             return render(request, 'common/../../templates/cart/checkout.html', context)
 
         context = {'items': items, 'order': order, 'form': form, 'items_in_cart': items_in_cart, }
         return render(request, 'common/../../templates/cart/checkout.html', context)
+
     else:
         return redirect('sign up')
 
@@ -103,7 +107,7 @@ def update_item(request):
 #
 #
 # class CartSerializer(serializers.ModelSerializer):
-#     user = TodoUserSerializer(read_only=True)
+#     user = OrderUserSerializer(read_only=True)
 #
 #     class Meta:
 #         model = OrderItem

@@ -1,5 +1,5 @@
 from ProjectDefence.products.views import add_product, DetailsProductView, LaptopsListView, PhonesListView, \
-    ConsolesListView, LatestProductsView
+    ConsolesListView, AllProductsView
 from django.urls import path
 
 urlpatterns = (
@@ -8,5 +8,5 @@ urlpatterns = (
     path('laptops/', LaptopsListView.as_view(), name='laptops'),
     path('phones/', PhonesListView.as_view(), name='phones'),
     path('consoles/', ConsolesListView.as_view(), name='consoles'),
-    path('latest_products/',LatestProductsView.as_view(),name='latest products'),
+    path('latest_products/', AllProductsView.as_view(), name='latest products'),
 )

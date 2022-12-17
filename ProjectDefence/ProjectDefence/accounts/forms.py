@@ -8,25 +8,48 @@ UserModel = get_user_model()
 
 
 class SignUpForm(auth_forms.UserCreationForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Enter your first name"}),
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs=
+            {'placeholder': "Enter your first name"}
+        ),
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs=
+            {'placeholder': "Enter your last name"}
+        ),
+    )
+    city = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder': "Enter your City/Town"}
+        ),
+    )
+    street = forms.CharField(
+        widget=forms.TextInput(
+            attrs=
+            {'placeholder': "Enter your Street name"}
+        ),
 
-                                 )
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Enter your last name"}),
+    )
+    number = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={'placeholder': "Enter your House number"}
+        ),
+        validators=
+        [MinValueValidator(1),
+         ],
+    )
+    image = forms.URLField(
+        widget=forms.URLInput(
+            attrs=
+            {'placeholder': "Add the URL for your profile picture"}
+        ),
+    )
 
-                                )
-    city = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Enter your City/Town"}),
-
-                           )
-    street = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Enter your Street name"}),
-
-                             )
-    number = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': "Enter your House number"}),
-                                validators=[MinValueValidator(1),
-                                            ], )
-    image = forms.URLField(widget=forms.URLInput(attrs={'placeholder': "Add the URL for your profile picture"})
-
-                           )
-    error_messages = {"password_mismatch": "One of the passwords is incorrect."}
+    error_messages = {
+        "password_mismatch": "One of the passwords is incorrect.",
+    }
 
     class Meta:
         model = UserModel
