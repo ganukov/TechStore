@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./ProjectDefence/:/usr/src/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./envs/.env
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: georgi123
+      POSTGRES_USER: ganuka
+      POSTGRES_DB: store
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/docker/volumes/my-postgres-data/_data
+volumes:
+  postgres-data:
