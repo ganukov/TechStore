@@ -15,7 +15,7 @@ for (let i = 0; i < updateBtns.length; i++) {
 
 function updateUserOrder(product_id, action) {
 
-    const url = 'http://127.0.0.1:8000/cart/update-item/'
+    const url = 'http://www.tech-store.org.uk/cart/update-item/'
 
     fetch(url, {
         method: 'POST',
